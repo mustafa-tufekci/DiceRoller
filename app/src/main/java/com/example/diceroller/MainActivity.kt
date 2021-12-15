@@ -2,6 +2,7 @@ package com.example.diceroller
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.TypedValue
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
@@ -12,7 +13,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val btnDice: Button = findViewById(R.id.dice_button)
-        val text: TextView = findViewById(R.id.dice_text)
 
         btnDice.setOnClickListener{
             rolldice()
@@ -22,6 +22,7 @@ class MainActivity : AppCompatActivity() {
 
     fun rolldice(){
         val image: ImageView = findViewById(R.id.imageView)
+        val text: TextView = findViewById(R.id.dice_text)
         val dice = Dice(6)
         val rolledDice = dice.roll()
 
@@ -34,7 +35,20 @@ class MainActivity : AppCompatActivity() {
             6 -> { R.drawable.dice_6 }
             else -> R.drawable.dice_6
         }
+
+        val turnedText = when(rolledDice){
+            1 -> "Gimli"
+            2 -> "Legolas"
+            3 -> "Aragorn"
+            4 -> "Gandalf"
+            5 -> "Arven"
+            6 -> "Frodo"
+            else -> ""
+        }
         image.setImageResource(turnedImage)
+        text.setText(turnedText)
+        text.setTextSize(TypedValue.COMPLEX_UNIT_SP, 25F);
+
     }
 }
 
